@@ -15,9 +15,9 @@ public class Main {
         Javalin app = Javalin.create()
                 .start(8888);
         //TODO: when using Docker please change the path to /static/index.html
-        app._conf.addSinglePageRoot("/", "./src/main/resources/static/index.html", Location.EXTERNAL);
+        app._conf.addSinglePageRoot("/", "/static/index.html", Location.EXTERNAL);
         //TODO: when using Docker please change the path to /static/
-        app._conf.addStaticFiles("./src/main/resources/static/", Location.EXTERNAL);
+        app._conf.addStaticFiles("/static/", Location.EXTERNAL);
         LOGGER.info("*** XDR Playground Server is up and running ***");
         new XDRController(app, new XDRServiceImpl());
     }
