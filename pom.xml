@@ -16,6 +16,7 @@
         <slf4j.version>1.7.31</slf4j.version>
         <java.version>1.8</java.version>
         <pubsub.version>1.0.33</pubsub.version>
+        <okhttp3.version>4.9.2</okhttp3.version>
     </properties>
 
     <build>
@@ -66,9 +67,9 @@
             <version>${slf4j.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.cybereason.msa</groupId>
-            <artifactId>pubsub</artifactId>
-            <version>${pubsub.version}</version>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp3.version}</version>
         </dependency>
     </dependencies>
 </project>

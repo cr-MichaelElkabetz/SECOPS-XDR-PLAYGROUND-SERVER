@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String[] args) {
         Javalin app = Javalin.create()
-                .start(8888);
+                .start(8080);
         //TODO: when using Docker please change the path to /static/index.html
         app._conf.addSinglePageRoot("/", "./src/main/resources/static/index.html", Location.EXTERNAL);
         //TODO: when using Docker please change the path to /static/
