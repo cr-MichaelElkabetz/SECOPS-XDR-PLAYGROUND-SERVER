@@ -10,10 +10,17 @@ public class XDRController {
             ctx.res.setStatus(200);
             ctx.result("OK");
         });
-        app.post("/api/execute", ctx -> {
-            ctx.res.setContentType("application/json");
+        app.post("/api/execute/{msName}", ctx -> {
+            String msName = ctx.pathParam("msName");
             String message = ctx.body();
-            ctx.result(xDRServiceImpl.execute(message));
+
+            ctx.res.setContentType("application/json");
+            String response = xDRServiceImpl.process(message, msName);
+            if ("ERROR".equalsIgnoreCase(response)) {
+                ctx.result("{\"message\":\"Processing failed\"}");
+            } else {
+                ctx.result("{\"message\":\"" + response + "\"}");
+            }
             ctx.res.setStatus(200);
         });
     }

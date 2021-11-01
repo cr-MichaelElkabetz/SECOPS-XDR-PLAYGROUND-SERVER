@@ -17,6 +17,7 @@
         <java.version>1.8</java.version>
         <pubsub.version>1.0.33</pubsub.version>
         <okhttp3.version>4.9.2</okhttp3.version>
+        <kafka.version>3.0.0</kafka.version>
     </properties>
 
     <build>
@@ -70,6 +71,11 @@
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>${okhttp3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>${kafka.version}</version>
         </dependency>
     </dependencies>
 </project>
