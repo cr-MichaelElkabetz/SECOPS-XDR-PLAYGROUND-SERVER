@@ -19,7 +19,20 @@ public class XDRController {
             if ("ERROR".equalsIgnoreCase(response)) {
                 ctx.result("{\"message\":\"Processing failed\"}");
             } else {
-                ctx.result("{\"message\":\"" + response + "\"}");
+                ctx.result("{\"message\":" + response + "}");
+            }
+            ctx.res.setStatus(200);
+        });
+
+        app.get("/api/user-account/get/all/{tenantID}", ctx -> {
+            String tenantID = ctx.pathParam("tenantID");
+
+            ctx.res.setContentType("application/json");
+            String response = xDRServiceImpl.getUserAccounts(tenantID);
+            if ("ERROR".equalsIgnoreCase(response)) {
+                ctx.result("{\"message\":\"Processing failed\"}");
+            } else {
+                ctx.result(response);
             }
             ctx.res.setStatus(200);
         });
