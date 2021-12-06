@@ -22,6 +22,8 @@ public class XDRServiceImpl implements XDRService {
     private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     private final OkHttpClient httpClient = new OkHttpClient();
 
+    public static Map<String, String> msToTopic;
+
     static {
         msToTopic = new HashMap<>();
         msToTopic.put("transformer", "research-chronicle-topic-sub");
@@ -30,13 +32,11 @@ public class XDRServiceImpl implements XDRService {
         msToTopic.put("router", "research-router-topic-sub");
     }
 
-    public static Map<String, String> msToTopic;
-
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public String process(String message, String msName) {
-        LOGGER.info("Received a message to deliver: " + message);
+        LOGGER.debug("Received a message to deliver: " + message);
         return publishAndConsume(message, msName);
     }
 

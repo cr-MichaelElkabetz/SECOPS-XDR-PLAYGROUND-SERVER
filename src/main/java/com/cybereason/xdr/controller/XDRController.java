@@ -3,6 +3,9 @@ package com.cybereason.xdr.controller;
 import com.cybereason.xdr.service.XDRService;
 import io.javalin.Javalin;
 
+import java.time.Duration;
+import java.time.Instant;
+
 public class XDRController {
     public XDRController(Javalin app, XDRService xDRServiceImpl) {
         app.get("/health", ctx -> {
@@ -15,11 +18,18 @@ public class XDRController {
             String message = ctx.body();
 
             ctx.res.setContentType("application/json");
+            Instant start = Instant.now();
+
             String response = xDRServiceImpl.process(message, msName);
             if ("ERROR".equalsIgnoreCase(response)) {
                 ctx.result("{\"message\":\"Processing failed\"}");
             } else {
-                ctx.result("{\"message\":" + response + "}");
+                Instant end = Instant.now();
+                String timeElapsed = Duration.between(start, end).toString()
+                        .substring(2)
+                        .replaceAll("(\\d[HMS])(?!$)", "$1 ")
+                        .toLowerCase();
+                ctx.result("{\"message\":" + response + ", \"timeElapsed\":\"" + timeElapsed + "\"}");
             }
             ctx.res.setStatus(200);
         });
