@@ -18,7 +18,7 @@ import java.util.concurrent.TimeoutException;
 
 public class XDRServiceImpl implements XDRService {
     private static final Logger LOGGER = LoggerFactory.getLogger(XDRServiceImpl.class);
-    private static final String BASE_URL = "http://localhost:8081";
+    private static final String BASE_URL = "http://identity-service:8086";
     private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
     private final OkHttpClient httpClient = new OkHttpClient();
 
@@ -26,10 +26,12 @@ public class XDRServiceImpl implements XDRService {
 
     static {
         msToTopic = new HashMap<>();
-        msToTopic.put("transformer", "research-chronicle-topic-sub");
-        msToTopic.put("identity", "research-idm-topic-sub");
-        msToTopic.put("threat", "research-threat-topic-sub");
+        msToTopic.put("transformer", "research-idm-topic-sub");
+        msToTopic.put("identity", "research-router-topic-sub");
+        msToTopic.put("threat", "research-router-topic-sub");
         msToTopic.put("router", "research-router-topic-sub");
+        msToTopic.put("transparency", "research-router-topic-sub");
+
     }
 
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -73,7 +75,7 @@ public class XDRServiceImpl implements XDRService {
 
         try {
             PubsubConfig.publish(message);
-            return PubsubConfig.subscribe(topic);
+            return PubsubConfig.subscribe(msName, topic);
         } catch (IOException | ExecutionException | InterruptedException | TimeoutException e) {
             LOGGER.error("Failed to produce PubSub Message:", e.getMessage(), e);
         }

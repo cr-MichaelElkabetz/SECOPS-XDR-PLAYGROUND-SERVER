@@ -20,6 +20,7 @@
         <kafka.version>3.0.0</kafka.version>
         <lombok.version>1.18.4</lombok.version>
         <jackson.version>2.13.0</jackson.version>
+        <cyber-schema.version>1.0.3</cyber-schema.version>
     </properties>
 
     <build>
@@ -74,6 +75,21 @@
         <dependency>
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-pubsub</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cybereason.cyber-schema</groupId>
+            <artifactId>schema</artifactId>
+            <version>${cyber-schema.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-validator</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>jakarta.validation</groupId>
+                    <artifactId>jakarta.validation-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>io.javalin</groupId>
