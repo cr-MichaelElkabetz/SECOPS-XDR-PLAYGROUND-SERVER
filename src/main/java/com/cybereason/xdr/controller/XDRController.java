@@ -46,5 +46,18 @@ public class XDRController {
             }
             ctx.res.setStatus(200);
         });
+
+        app.get("/api/bigtable-viewer/prod/{type}", ctx -> {
+            String type = ctx.pathParam("type");
+
+            ctx.res.setContentType("application/json");
+            String response = xDRServiceImpl.getBigtableData(type);
+            if ("ERROR".equalsIgnoreCase(response)) {
+                ctx.result("{\"message\":\"Processing failed\"}");
+            } else {
+                ctx.result(response);
+            }
+            ctx.res.setStatus(200);
+        });
     }
 }

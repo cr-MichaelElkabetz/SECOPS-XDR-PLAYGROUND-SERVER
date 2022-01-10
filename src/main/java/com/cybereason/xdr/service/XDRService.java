@@ -6,4 +6,6 @@ public interface XDRService {
     String process(String message, String msName);
 
     String getUserAccounts(String tenantID) throws JsonProcessingException;
+
+    String getBigtableData(String type) throws JsonProcessingException;
 }

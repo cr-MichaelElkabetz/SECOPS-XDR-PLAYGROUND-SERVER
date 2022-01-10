@@ -21,6 +21,7 @@
         <lombok.version>1.18.4</lombok.version>
         <jackson.version>2.13.0</jackson.version>
         <cyber-schema.version>1.0.3</cyber-schema.version>
+        <bigtable.version>2.4.0</bigtable.version>
     </properties>
 
     <build>
@@ -72,6 +73,11 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-bigtable</artifactId>
+            <version>${bigtable.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-pubsub</artifactId>

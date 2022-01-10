@@ -15,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserAccount {
+    String sid;
     String adSid;
     String adLogonName;
     String adDisplayName;
@@ -23,6 +24,7 @@ public class UserAccount {
     String adCreated;
     String accountStatus;
     String employeeNumber;
+    String userIdentity;
     String provider;
     String accountType;
 
