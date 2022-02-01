@@ -6,7 +6,6 @@ import com.google.cloud.bigtable.data.v2.BigtableDataClient;
 import com.google.cloud.bigtable.data.v2.BigtableDataSettings;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 
@@ -16,7 +15,6 @@ import java.io.IOException;
  */
 
 @Slf4j
-@Configuration
 @Data
 public class BigTableConfig {
 

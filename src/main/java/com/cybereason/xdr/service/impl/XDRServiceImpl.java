@@ -24,6 +24,8 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
+import static com.google.cloud.bigtable.data.v2.models.Filters.FILTERS;
+
 public class XDRServiceImpl implements XDRService {
     private static final ObjectMapper objectMapper = new ObjectMapper();
     private static final Logger LOGGER = LoggerFactory.getLogger(XDRServiceImpl.class);
@@ -86,6 +88,7 @@ public class XDRServiceImpl implements XDRService {
                 tableNames = BigTableConfig.bigtableAdmin().listTables();
                 for (String tableName : tableNames) {
                     Query query = Query.create(tableName).prefix("account");
+                    query.filter(FILTERS.limit().cellsPerRow(1));
                     ServerStream<Row> rows = BigTableConfig.bigtableDataClient().readRows(query);
                     for (Row row : rows) {
                         String key = row.getKey().toStringUtf8();
@@ -104,6 +107,7 @@ public class XDRServiceImpl implements XDRService {
                 tableNames = BigTableConfig.bigtableAdmin().listTables();
                 for (String tableName : tableNames) {
                     Query query = Query.create(tableName).prefix("identity");
+                    query.filter(FILTERS.limit().cellsPerRow(1));
                     ServerStream<Row> rows = BigTableConfig.bigtableDataClient().readRows(query);
                     for (Row row : rows) {
                         String key = row.getKey().toStringUtf8();

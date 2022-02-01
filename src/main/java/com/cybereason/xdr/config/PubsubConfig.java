@@ -90,7 +90,7 @@ public class PubsubConfig {
     }
 
     private static String getTransparencyOutput(IdentityEnrichmentMessage identityEnrichmentMessage) throws JsonProcessingException {
-        Event event = identityEnrichmentMessage.getCybereasonDataObjects().iterator().next().getEvent();
+        Event event = (Event) identityEnrichmentMessage.getCybereasonDataObjects().iterator().next();
         if (event != null) {
             SingleMessage singleMessage = SingleMessage.builder().dataSource("xdr").schemaId("base").elementType("Event").jsonNode(objectMapper.valueToTree(event)).build();
             return executeRequest(singleMessage);
